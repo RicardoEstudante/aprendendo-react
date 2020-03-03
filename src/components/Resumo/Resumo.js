@@ -5,7 +5,7 @@ class Resumo extends Component{
         super(props); // chama o construtor da classe pai
         this.state = {
             consultas : {
-                consultas_30dias_anteriores : 0,
+                consultas_30dias_anteriores : 10,
                 consultas_30dias_posteriores : 0
             },
             faturamento : {
@@ -21,6 +21,12 @@ class Resumo extends Component{
         }
     }
 
+    componentDidMount() {
+        fetch("http://www.devup.com.br/php/api-dashboard/api/resumo")
+            .then(resultado => resultado.json().then(dados => this.setState(dados)))
+
+    }
+
     render() {
         return (
             <div>
@@ -32,12 +38,12 @@ class Resumo extends Component{
 
                         <div className="row">
                             <div className="col">
-                                <div className="card mt-2 text-cemter">
+                                <div className="card mt-2 text-center">
                                     <div className="card-header">
                                         30 dias anteriores
                                     </div>
                                     <div className="card-body">
-                                        { this.state.consultas.consultas_30dias_anteriores}
+                                        { this.state.consultas.consultas_30dias_anteriores }
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +69,7 @@ class Resumo extends Component{
                                     </div>
                                     <div className="card-body">
                                         { this.state.faturamento.anterior.valor.toLocaleString("pt-BR", { style : "currency", currency : "BRL"}) }
-                                        <span className="badge badge-success m1-1">
+                                        <span className={"badge ml-1 " + (this.state.faturamento.anterior.comparativo > 0 ? "badge-success" : "badge-danger")}>
                                             { this.state.faturamento.anterior.comparativo } %
                                         </span>
                                     </div>
@@ -76,7 +82,7 @@ class Resumo extends Component{
                                     </div>
                                     <div className="card-body">
                                         { this.state.faturamento.previsao.valor.toLocaleString("pt-BR", { style : "currency", currency : "BRL"})}
-                                        <span className="badge badge-danger m1-1">
+                                        <span className={ "badge ml-1 " + (this.state.faturamento.previsao.comparativo > 0 ? "badge-success" : "badge-danger")}>
                                             { this.state.faturamento.previsao.comparativo } %
                                         </span>
                                     </div>
