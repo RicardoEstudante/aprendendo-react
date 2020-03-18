@@ -23,7 +23,7 @@ class Resumo extends Component{
     }
 
     componentDidMount() {
-        consultarResumo();
+        consultarResumo().then(dados => this.setState(dados));
          }
 
     render() {
