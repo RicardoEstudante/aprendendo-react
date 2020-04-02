@@ -1,9 +1,15 @@
-# React
+#React
 
-### Construindo uma SPA(Single Page Application) usando react
+### Construindo minha primeira SPA(Single Page Application) usando React.
 
 ---
-
-- Resumos
-- Consultas
-- Faturamentos
+Instalar as dependências - `yarn install`
+---
+Rodando o projeto - `yarn start`
+---
+- Telas
+    - Resumos
+    - Consultas
+    - Faturamentos
+    
+    
